@@ -14,10 +14,10 @@ dependencies:
   video_player:
     git:
       url: https://github.com/iAmPlus/plugins.git
-      ref: video_player-v1.0.1/audio-configuration-enabled-IOS
+      ref: video_player-v1.0.1_iOS/Audio_isDefaultAudioConfigurationEnabled
       path: packages/video_player/video_player
-  provider: ^4.0.5
-  wakelock: ^0.1.4+1
+  provider: ^5.0.0
+  wakelock: ^0.5.0+2
 
 dev_dependencies:
   flutter_test:
