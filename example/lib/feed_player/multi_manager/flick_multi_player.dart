@@ -26,7 +26,7 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
   @override
   void initState() {
     flickManager = FlickManager(
-      videoPlayerController: VideoPlayerController.network(widget.url)
+      videoPlayerController: VideoPlayerController.network(widget.url,videoPlayerOptions: VideoPlayerOptions(isDefaultAudioConfigurationEnabled: false))
         ..setLooping(true),
       autoPlay: false,
     );
