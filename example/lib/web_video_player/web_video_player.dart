@@ -1,25 +1,35 @@
 import 'package:example/utils/mock_data.dart';
+import 'package:example/web_video_player/web_video_control.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:video_player/video_player.dart';
 
-class DefaultPlayer extends StatefulWidget {
-  DefaultPlayer({Key? key}) : super(key: key);
+import 'data_manager.dart';
+
+class WebVideoPlayer extends StatefulWidget {
+  WebVideoPlayer({Key? key}) : super(key: key);
 
   @override
-  _DefaultPlayerState createState() => _DefaultPlayerState();
+  _WebVideoPlayerState createState() => _WebVideoPlayerState();
 }
 
-class _DefaultPlayerState extends State<DefaultPlayer> {
+class _WebVideoPlayerState extends State<WebVideoPlayer> {
   late FlickManager flickManager;
+  late DataManager? dataManager;
+
   @override
   void initState() {
     super.initState();
     flickManager = FlickManager(
       videoPlayerController:
-          VideoPlayerController.network(mockData["items"][0]["trailer_url"]),
+          VideoPlayerController.network(mockData["items"][1]["trailer_url"]),
     );
+    List<String> urls = (mockData["items"] as List)
+        .map<String>((item) => item["trailer_url"])
+        .toList();
+
+    dataManager = DataManager(flickManager: flickManager, urls: urls);
   }
 
   @override
@@ -43,10 +53,17 @@ class _DefaultPlayerState extends State<DefaultPlayer> {
         child: FlickVideoPlayer(
           flickManager: flickManager,
           flickVideoWithControls: FlickVideoWithControls(
-            controls: FlickPortraitControls(),
-          ),
-          flickVideoWithControlsFullscreen: FlickVideoWithControls(
-            controls: FlickLandscapeControls(),
+            controls: WebVideoControl(
+              dataManager: dataManager!,
+              iconSize: 30,
+              fontSize: 14,
+              progressBarSettings: FlickProgressBarSettings(
+                height: 5,
+                handleRadius: 5.5,
+              ),
+            ),
+            videoFit: BoxFit.contain,
+            // aspectRatioWhenLoading: 4 / 3,
           ),
         ),
       ),

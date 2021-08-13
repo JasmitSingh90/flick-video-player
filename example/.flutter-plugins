@@ -1,4 +1,5 @@
 # This is a generated file; do not edit or check into version control.
-video_player=/Users/ruchika/.pub-cache/git/plugins-77b2b0a5845d69844279a9a6dcbf753556992391/packages/video_player/video_player/
-video_player_web=/Users/ruchika/.pub-cache/git/plugins-77b2b0a5845d69844279a9a6dcbf753556992391/packages/video_player/video_player_web/
-wakelock=/Users/ruchika/.pub-cache/hosted/pub.dartlang.org/wakelock-0.1.4+2/
+video_player=/Users/jasmitsingh/development/flutter/.pub-cache/git/plugins-f65e428214d330e0a9a6549cbc975496c03ce518/packages/video_player/video_player/
+wakelock=/Users/jasmitsingh/development/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock-0.5.3+3/
+wakelock_macos=/Users/jasmitsingh/development/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_macos-0.1.0+2/
+wakelock_web=/Users/jasmitsingh/development/flutter/.pub-cache/hosted/pub.dartlang.org/wakelock_web-0.2.0+2/

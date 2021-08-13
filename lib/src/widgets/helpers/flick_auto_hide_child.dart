@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 /// Hides the child with [FadeAnimation].
 class FlickAutoHideChild extends StatelessWidget {
   const FlickAutoHideChild({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
     this.autoHide = true,
     this.showIfVideoNotInitialized = true,
   }) : super(key: key);
@@ -20,11 +20,11 @@ class FlickAutoHideChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FlickDisplayManager displayManager =
-        Provider.of<FlickDisplayManager>(context);
-    FlickVideoManager videoManager = Provider.of<FlickVideoManager>(context);
+    FlickDisplayManager? displayManager =
+        Provider.of<FlickDisplayManager?>(context);
+    FlickVideoManager? videoManager = Provider.of<FlickVideoManager?>(context);
 
-    return (!videoManager.isVideoInitialized && !showIfVideoNotInitialized)
+    return (!videoManager!.isVideoInitialized && !showIfVideoNotInitialized)
         ? Container()
         : autoHide
             ? AnimatedSwitcher(
@@ -36,7 +36,7 @@ class FlickAutoHideChild extends StatelessWidget {
                   );
                 },
                 child:
-                    (displayManager.showPlayerControls) ? child : Container(),
+                    (displayManager!.showPlayerControls) ? child : Container(),
               )
             : child;
   }

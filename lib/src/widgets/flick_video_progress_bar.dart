@@ -10,22 +10,22 @@ class FlickVideoProgressBar extends StatelessWidget {
     this.onDragEnd,
     this.onDragStart,
     this.onDragUpdate,
-    FlickProgressBarSettings flickProgressBarSettings,
+    FlickProgressBarSettings? flickProgressBarSettings,
   }) : flickProgressBarSettings = flickProgressBarSettings != null
             ? flickProgressBarSettings
             : FlickProgressBarSettings();
 
   final FlickProgressBarSettings flickProgressBarSettings;
-  final Function() onDragStart;
-  final Function() onDragEnd;
-  final Function() onDragUpdate;
+  final Function()? onDragStart;
+  final Function()? onDragEnd;
+  final Function()? onDragUpdate;
 
   @override
   Widget build(BuildContext context) {
-    FlickControlManager controlManager =
-        Provider.of<FlickControlManager>(context);
-    FlickVideoManager videoManager = Provider.of<FlickVideoManager>(context);
-    VideoPlayerValue videoPlayerValue = videoManager.videoPlayerValue;
+    FlickControlManager? controlManager =
+        Provider.of<FlickControlManager?>(context);
+    FlickVideoManager? videoManager = Provider.of<FlickVideoManager?>(context);
+    VideoPlayerValue? videoPlayerValue = videoManager!.videoPlayerValue;
 
     if (videoPlayerValue == null) return Container();
 
@@ -33,8 +33,8 @@ class FlickVideoProgressBar extends StatelessWidget {
       final box = context.findRenderObject() as RenderBox;
       final Offset tapPos = box.globalToLocal(globalPosition);
       final double relative = tapPos.dx / box.size.width;
-      final Duration position = videoPlayerValue.duration * relative;
-      controlManager.seekTo(position);
+      final Duration position = videoPlayerValue.duration! * relative;
+      controlManager!.seekTo(position);
     }
 
     return LayoutBuilder(builder: (context, size) {
@@ -58,12 +58,12 @@ class FlickVideoProgressBar extends StatelessWidget {
             return;
           }
           // _controllerWasPlaying = flickControlManager.isPlaying;
-          if (videoManager.isPlaying) {
-            controlManager.autoPause();
+          if (videoManager!.isPlaying) {
+            controlManager!.autoPause();
           }
 
           if (onDragStart != null) {
-            onDragStart();
+            onDragStart!();
           }
         },
         onHorizontalDragUpdate: (DragUpdateDetails details) {
@@ -73,14 +73,14 @@ class FlickVideoProgressBar extends StatelessWidget {
           seekToRelativePosition(details.globalPosition);
 
           if (onDragUpdate != null) {
-            onDragUpdate();
+            onDragUpdate!();
           }
         },
         onHorizontalDragEnd: (DragEndDetails details) {
-          controlManager.autoResume();
+          controlManager!.autoResume();
 
           if (onDragEnd != null) {
-            onDragEnd();
+            onDragEnd!();
           }
         },
         onTapDown: (TapDownDetails details) {
@@ -98,7 +98,7 @@ class _ProgressBarPainter extends CustomPainter {
   _ProgressBarPainter(this.value, {this.flickProgressBarSettings});
 
   VideoPlayerValue value;
-  FlickProgressBarSettings flickProgressBarSettings;
+  FlickProgressBarSettings? flickProgressBarSettings;
 
   @override
   bool shouldRepaint(CustomPainter painter) {
@@ -107,18 +107,18 @@ class _ProgressBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    double height = flickProgressBarSettings.height;
+    double height = flickProgressBarSettings!.height;
     double width = size.width;
-    double curveRadius = flickProgressBarSettings.curveRadius;
-    double handleRadius = flickProgressBarSettings.handleRadius;
-    Paint backgroundPaint = flickProgressBarSettings.getBackgroundPaint != null
-        ? flickProgressBarSettings.getBackgroundPaint(
+    double curveRadius = flickProgressBarSettings!.curveRadius;
+    double handleRadius = flickProgressBarSettings!.handleRadius;
+    Paint backgroundPaint = flickProgressBarSettings!.getBackgroundPaint != null
+        ? flickProgressBarSettings!.getBackgroundPaint!(
             width: width,
             height: height,
             handleRadius: handleRadius,
           )
         : Paint()
-      ..color = flickProgressBarSettings.backgroundColor;
+      ..color = flickProgressBarSettings!.backgroundColor;
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -135,16 +135,16 @@ class _ProgressBarPainter extends CustomPainter {
     }
 
     final double playedPartPercent =
-        value.position.inMilliseconds / value.duration.inMilliseconds;
+        value.position.inMilliseconds / value.duration!.inMilliseconds;
     final double playedPart =
         playedPartPercent > 1 ? width : playedPartPercent * width;
 
     for (DurationRange range in value.buffered) {
-      final double start = range.startFraction(value.duration) * width;
-      final double end = range.endFraction(value.duration) * width;
+      final double start = range.startFraction(value.duration!) * width;
+      final double end = range.endFraction(value.duration!) * width;
 
-      Paint bufferedPaint = flickProgressBarSettings.getBufferedPaint != null
-          ? flickProgressBarSettings.getBufferedPaint(
+      Paint bufferedPaint = flickProgressBarSettings!.getBufferedPaint != null
+          ? flickProgressBarSettings!.getBufferedPaint!(
               width: width,
               height: height,
               playedPart: playedPart,
@@ -152,7 +152,7 @@ class _ProgressBarPainter extends CustomPainter {
               bufferedStart: start,
               bufferedEnd: end)
           : Paint()
-        ..color = flickProgressBarSettings.bufferedColor;
+        ..color = flickProgressBarSettings!.bufferedColor;
 
       canvas.drawRRect(
         RRect.fromRectAndRadius(
@@ -166,15 +166,15 @@ class _ProgressBarPainter extends CustomPainter {
       );
     }
 
-    Paint playedPaint = flickProgressBarSettings.getPlayedPaint != null
-        ? flickProgressBarSettings.getPlayedPaint(
+    Paint playedPaint = flickProgressBarSettings!.getPlayedPaint != null
+        ? flickProgressBarSettings!.getPlayedPaint!(
             width: width,
             height: height,
             playedPart: playedPart,
             handleRadius: handleRadius,
           )
         : Paint()
-      ..color = flickProgressBarSettings.playedColor;
+      ..color = flickProgressBarSettings!.playedColor;
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromPoints(
@@ -186,15 +186,15 @@ class _ProgressBarPainter extends CustomPainter {
       playedPaint,
     );
 
-    Paint handlePaint = flickProgressBarSettings.getHandlePaint != null
-        ? flickProgressBarSettings.getHandlePaint(
+    Paint handlePaint = flickProgressBarSettings!.getHandlePaint != null
+        ? flickProgressBarSettings!.getHandlePaint!(
             width: width,
             height: height,
             playedPart: playedPart,
             handleRadius: handleRadius,
           )
         : Paint()
-      ..color = flickProgressBarSettings.handleColor;
+      ..color = flickProgressBarSettings!.handleColor;
 
     canvas.drawCircle(
       Offset(playedPart, height / 2),

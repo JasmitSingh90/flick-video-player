@@ -2,28 +2,29 @@ import 'package:example/animation_player/portrait_video_controls.dart';
 import 'package:example/utils/mock_data.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widgets/flutter_widgets.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:video_player/video_player.dart';
 
 import './data_manager.dart';
 import 'landscape_controls.dart';
 
 class AnimationPlayer extends StatefulWidget {
-  AnimationPlayer({Key key}) : super(key: key);
+  AnimationPlayer({Key? key}) : super(key: key);
 
   @override
   _AnimationPlayerState createState() => _AnimationPlayerState();
 }
 
 class _AnimationPlayerState extends State<AnimationPlayer> {
-  FlickManager flickManager;
-  AnimationPlayerDataManager dataManager;
+  late FlickManager flickManager;
+  late AnimationPlayerDataManager dataManager;
   List items = mockData['items'];
   bool _pauseOnTap = true;
-
+  double playBackSpeed = 1.0;
   @override
   void initState() {
     super.initState();
+    // String url = items[0]['trailer_url'];
     flickManager = FlickManager(
       videoPlayerController:
           VideoPlayerController.network(items[0]['trailer_url']),
@@ -47,9 +48,9 @@ class _AnimationPlayerState extends State<AnimationPlayer> {
       key: ObjectKey(flickManager),
       onVisibilityChanged: (visibility) {
         if (visibility.visibleFraction == 0 && this.mounted) {
-          flickManager.flickControlManager.autoPause();
+          flickManager.flickControlManager!.autoPause();
         } else if (visibility.visibleFraction == 1) {
-          flickManager.flickControlManager.autoResume();
+          flickManager.flickControlManager!.autoResume();
         }
       },
       child: Container(
@@ -67,7 +68,7 @@ class _AnimationPlayerState extends State<AnimationPlayer> {
                 ),
               ),
             ),
-            RaisedButton(
+            ElevatedButton(
               child: Text('Next video'),
               onPressed: () => dataManager.playNextVideo(),
             ),
@@ -107,6 +108,30 @@ class _AnimationPlayerState extends State<AnimationPlayer> {
                     )
                   ],
                 ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Text('Playback speed -- '),
+                Row(
+                  children: [
+                    Slider(
+                      value: playBackSpeed,
+                      onChanged: (val) {},
+                      onChangeEnd: (val) {
+                        flickManager.flickVideoManager?.videoPlayerController!
+                            .setPlaybackSpeed(val);
+                        setState(() {
+                          playBackSpeed = val;
+                        });
+                      },
+                      min: 0.25,
+                      max: 2,
+                    ),
+                    Text(playBackSpeed.toStringAsFixed(2).toString()),
+                  ],
+                )
               ],
             ),
           ],

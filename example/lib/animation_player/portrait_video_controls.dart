@@ -5,17 +5,17 @@ import 'package:provider/provider.dart';
 
 class AnimationPlayerPortraitVideoControls extends StatelessWidget {
   const AnimationPlayerPortraitVideoControls({
-    Key key,
+    Key? key,
     this.pauseOnTap,
     this.dataManager,
   }) : super(key: key);
-  final bool pauseOnTap;
-  final AnimationPlayerDataManager dataManager;
+  final bool? pauseOnTap;
+  final AnimationPlayerDataManager? dataManager;
 
   @override
   Widget build(BuildContext context) {
-    FlickVideoManager flickVideoManager =
-        Provider.of<FlickVideoManager>(context);
+    FlickVideoManager? flickVideoManager =
+        Provider.of<FlickVideoManager?>(context);
 
     return Container(
       child: AnimatedSwitcher(
@@ -30,7 +30,7 @@ class AnimationPlayerPortraitVideoControls extends StatelessWidget {
                   .animate(animation);
 
           animationOffset =
-              child.key == ObjectKey(flickVideoManager.videoPlayerController)
+              child.key == ObjectKey(flickVideoManager!.videoPlayerController)
                   ? inAnimation
                   : outAnimation;
 
@@ -41,7 +41,7 @@ class AnimationPlayerPortraitVideoControls extends StatelessWidget {
         },
         child: Container(
           key: ObjectKey(
-            flickVideoManager.videoPlayerController,
+            flickVideoManager!.videoPlayerController,
           ),
           margin: EdgeInsets.all(10),
           child: ClipRRect(
@@ -50,7 +50,7 @@ class AnimationPlayerPortraitVideoControls extends StatelessWidget {
               willVideoPlayerControllerChange: false,
               playerLoadingFallback: Positioned.fill(
                 child: Image.asset(
-                  dataManager.getCurrentPoster(),
+                  dataManager!.getCurrentPoster(),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -63,7 +63,7 @@ class AnimationPlayerPortraitVideoControls extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Expanded(
-                        child: pauseOnTap
+                        child: pauseOnTap!
                             ? FlickTogglePlayAction(
                                 child: FlickSeekVideoAction(
                                   child: Center(child: FlickVideoBuffer()),

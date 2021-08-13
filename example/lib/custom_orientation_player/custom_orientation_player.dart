@@ -3,13 +3,13 @@ import 'package:example/utils/mock_data.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_widgets/flutter_widgets.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:video_player/video_player.dart';
 
 import 'data_manager.dart';
 
 class CustomOrientationPlayer extends StatefulWidget {
-  CustomOrientationPlayer({Key key}) : super(key: key);
+  CustomOrientationPlayer({Key? key}) : super(key: key);
 
   @override
   _CustomOrientationPlayerState createState() =>
@@ -17,8 +17,8 @@ class CustomOrientationPlayer extends StatefulWidget {
 }
 
 class _CustomOrientationPlayerState extends State<CustomOrientationPlayer> {
-  FlickManager flickManager;
-  DataManager dataManager;
+  late FlickManager flickManager;
+  late DataManager dataManager;
   List<String> urls = (mockData["items"] as List)
       .map<String>((item) => item["trailer_url"])
       .toList();
@@ -53,9 +53,9 @@ class _CustomOrientationPlayerState extends State<CustomOrientationPlayer> {
       key: ObjectKey(flickManager),
       onVisibilityChanged: (visibility) {
         if (visibility.visibleFraction == 0 && this.mounted) {
-          flickManager.flickControlManager.autoPause();
+          flickManager.flickControlManager?.autoPause();
         } else if (visibility.visibleFraction == 1) {
-          flickManager.flickControlManager.autoResume();
+          flickManager.flickControlManager?.autoResume();
         }
       },
       child: Column(
