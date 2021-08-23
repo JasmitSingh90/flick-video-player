@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 /// GestureDetector that calls [flickDisplayManager.handleVideoTap] onTap of opaque area/child.
-class FlickShowControlsAction extends StatelessWidget {
-  const FlickShowControlsAction(
+class FlickShowControlsActionWeb extends StatelessWidget {
+  const FlickShowControlsActionWeb(
       {Key? key,
       this.child,
       this.behavior = HitTestBehavior.opaque,
@@ -27,16 +27,14 @@ class FlickShowControlsAction extends StatelessWidget {
     FlickDisplayManager displayManager =
         Provider.of<FlickDisplayManager>(context);
     return Container(
-      child: GestureDetector(
+      child: MouseRegion(
         key: key,
         child: child,
-        behavior: behavior,
-        onTap: () {
-          if (handleVideoTap != null) {
-            handleVideoTap!();
-          } else {
-            displayManager.handleVideoTap();
-          }
+        onEnter: (_) {
+          displayManager.handleShowPlayerControls();
+        },
+        onHover: (_) {
+          displayManager.handleShowPlayerControls();
         },
       ),
     );

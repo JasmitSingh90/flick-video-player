@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 /// Show a widget based on the full-screen state of the player and toggle the same.
-class FlickFullScreenToggle extends StatelessWidget {
-  const FlickFullScreenToggle(
+class FlickSetPlayBack extends StatelessWidget {
+  const FlickSetPlayBack(
       {Key? key,
-      this.enterFullScreenChild,
-      this.exitFullScreenChild,
-      this.toggleFullscreen,
+      this.playBackChild,
+      this.setPlayBack,
+      this.speed = 1.0,
       this.size,
       this.color,
       this.padding,
@@ -18,12 +18,7 @@ class FlickFullScreenToggle extends StatelessWidget {
   /// Widget shown when player is not in full-screen.
   ///
   /// Default - [Icon(Icons.fullscreen)]
-  final Widget? enterFullScreenChild;
-
-  /// Widget shown when player is in full-screen.
-  ///
-  ///  Default - [Icon(Icons.fullscreen_exit)]
-  final Widget? exitFullScreenChild;
+  final Widget? playBackChild;
 
   /// Function called onTap of the visible child.
   ///
@@ -31,7 +26,10 @@ class FlickFullScreenToggle extends StatelessWidget {
   /// ```dart
   ///     controlManager.toggleFullscreen();
   /// ```
-  final Function? toggleFullscreen;
+  final Function? setPlayBack;
+
+  /// Speed value of 2.0, your video will play at 2x the regular playback speed and so on.
+  final double speed;
 
   /// Size for the default icons.
   final double? size;
@@ -49,30 +47,22 @@ class FlickFullScreenToggle extends StatelessWidget {
   Widget build(BuildContext context) {
     FlickControlManager controlManager =
         Provider.of<FlickControlManager>(context);
-    Widget enterFullScreenWidget = enterFullScreenChild ??
+    Widget playBackWidget = playBackChild ??
         Icon(
-          Icons.fullscreen,
-          size: size,
-          color: color,
-        );
-    Widget exitFullScreenWidget = exitFullScreenChild ??
-        Icon(
-          Icons.fullscreen_exit,
+          Icons.play_circle_outline_sharp,
           size: size,
           color: color,
         );
 
-    Widget child = controlManager.isFullscreen
-        ? exitFullScreenWidget
-        : enterFullScreenWidget;
+    Widget child = playBackWidget;
 
     return GestureDetector(
       key: key,
       onTap: () {
-        if (toggleFullscreen != null) {
-          toggleFullscreen!();
+        if (setPlayBack != null) {
+          setPlayBack!();
         } else {
-          controlManager.toggleFullscreen();
+          if (speed != 1.0) controlManager.setPlaybackSpeed(speed);
         }
       },
       child: Container(

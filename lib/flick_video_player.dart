@@ -5,16 +5,20 @@ export './src/manager/flick_manager.dart';
 
 export './src/widgets/action_widgets/flick_seek_video_action.dart';
 export './src/widgets/action_widgets/flick_show_control_action.dart';
+export './src/widgets/action_widgets/flick_show_control_action_web.dart';
 export './src/widgets/action_widgets/flick_toggle_play_action.dart';
 export './src/widgets/action_widgets/flick_toggle_sound_action.dart';
 export './src/widgets/helpers/flick_auto_hide_child.dart';
 
 export './src/widgets/helpers/progress_bar/progress_bar_settings.dart';
 
+export './src/widgets/flick_animated_volume_level.dart';
 export './src/widgets/flick_full_screen_toggle.dart';
 export './src/widgets/flick_play_toggle.dart';
 export './src/widgets/flick_video_progress_bar.dart';
 export './src/widgets/flick_sound_toggle.dart';
+export './src/widgets/flick_set_play_back.dart';
+
 export './src/widgets/flick_video_buffer.dart';
 export './src/widgets/flick_current_position.dart';
 export './src/widgets/flick_total_duration.dart';
