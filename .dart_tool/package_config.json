@@ -189,21 +189,21 @@
     },
     {
       "name": "video_player",
-      "rootUri": "file:///Users/jasmitsingh/development/flutter/.pub-cache/git/plugins-77b2b0a5845d69844279a9a6dcbf753556992391/packages/video_player/video_player",
+      "rootUri": "file:///Users/jasmitsingh/development/flutter/.pub-cache/git/plugins-85f1575818e385b19617f38030692e5f76fd9185/packages/video_player/video_player",
       "packageUri": "lib/",
-      "languageVersion": "2.8"
+      "languageVersion": "2.12"
     },
     {
       "name": "video_player_platform_interface",
-      "rootUri": "file:///Users/jasmitsingh/development/flutter/.pub-cache/git/plugins-77b2b0a5845d69844279a9a6dcbf753556992391/packages/video_player/video_player_platform_interface",
+      "rootUri": "file:///Users/jasmitsingh/development/flutter/.pub-cache/git/plugins-85f1575818e385b19617f38030692e5f76fd9185/packages/video_player/video_player_platform_interface",
       "packageUri": "lib/",
-      "languageVersion": "2.8"
+      "languageVersion": "2.12"
     },
     {
       "name": "video_player_web",
-      "rootUri": "file:///Users/jasmitsingh/development/flutter/.pub-cache/git/plugins-77b2b0a5845d69844279a9a6dcbf753556992391/packages/video_player/video_player_web",
+      "rootUri": "file:///Users/jasmitsingh/development/flutter/.pub-cache/git/plugins-85f1575818e385b19617f38030692e5f76fd9185/packages/video_player/video_player_web",
       "packageUri": "lib/",
-      "languageVersion": "2.8"
+      "languageVersion": "2.12"
     },
     {
       "name": "wakelock",
@@ -248,7 +248,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2021-08-23T11:29:44.114015Z",
+  "generated": "2021-08-23T12:16:23.639379Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

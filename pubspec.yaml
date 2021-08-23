@@ -13,8 +13,8 @@ dependencies:
     sdk: flutter
   video_player:
     git:
-      url: https://github.com/iAmPlus/plugins.git
-      ref: video_player-v1.0.1_iOS/Audio_isDefaultAudioConfigurationEnabled
+      url: https://github.com/JasmitSingh90/plugins.git
+      ref: feature/AudioConfigurationEnabledIOS_Update
       path: packages/video_player/video_player
   provider: ^5.0.0
   wakelock: ^0.5.0+2
