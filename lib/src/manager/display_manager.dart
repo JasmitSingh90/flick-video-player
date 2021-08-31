@@ -4,17 +4,20 @@ part of flick_manager;
 class FlickDisplayManager extends ChangeNotifier {
   /// Manages display related properties like auto-hide controls.
   FlickDisplayManager({
-    FlickManager flickManager,
+    FlickManager? flickManager,
   }) : _flickManager = flickManager {
     handleShowPlayerControls();
   }
 
-  final FlickManager _flickManager;
+  final FlickManager? _flickManager;
   bool _mounted = true;
-  Timer _showPlayerControlsTimer;
+  Timer? _showPlayerControlsTimer;
+  Timer? _showVolumeLevelTimer;
   bool _showPlayerControls = true;
   bool _showForwardSeek = false;
   bool _showBackwardSeek = false;
+  bool _showVolumeLevel = false;
+  double? volume;
 
   /// Show player controls or not.
   bool get showPlayerControls => _showPlayerControls;
@@ -24,6 +27,9 @@ class FlickDisplayManager extends ChangeNotifier {
 
   // Show backward seek icon or not.
   bool get showBackwardSeek => _showBackwardSeek;
+
+  // Show volume level or not.
+  bool get showVolumeLevel => _showVolumeLevel;
 
   /// User video tap action.
   handleVideoTap() {
@@ -55,12 +61,12 @@ class FlickDisplayManager extends ChangeNotifier {
       // Timer duration fetched through channel, passing the current player information.
 
       _showPlayerControlsTimer = Timer(
-          _flickManager.getPlayerControlsTimeout(
-            errorInVideo: _flickManager.flickVideoManager.errorInVideo,
+          _flickManager!.getPlayerControlsTimeout(
+            errorInVideo: _flickManager!.flickVideoManager!.errorInVideo,
             isVideoInitialized:
-                _flickManager.flickVideoManager.isVideoInitialized,
-            isPlaying: _flickManager.flickVideoManager.isPlaying,
-            isVideoEnded: _flickManager.flickVideoManager.isVideoEnded,
+                _flickManager!.flickVideoManager!.isVideoInitialized,
+            isPlaying: _flickManager!.flickVideoManager!.isPlaying,
+            isVideoEnded: _flickManager!.flickVideoManager!.isVideoEnded,
           ), () {
         _showPlayerControls = false;
         _notify();
@@ -70,7 +76,7 @@ class FlickDisplayManager extends ChangeNotifier {
 
   // Called when user calls seekForward or seekBackward
   // on the controlManager.
-  _handleVideoSeek({bool forward}) {
+  _handleVideoSeek({required bool forward}) {
     if (forward) {
       _showForwardSeek = true;
     } else {
@@ -81,6 +87,21 @@ class FlickDisplayManager extends ChangeNotifier {
     Timer(Duration(milliseconds: 400), () {
       _showForwardSeek = false;
       _showBackwardSeek = false;
+      _notify();
+    });
+  }
+
+  /// Show the volume level.
+  ///
+  handleShowVolumeLevel({Duration duration = const Duration(seconds: 3)}) {
+    _showVolumeLevel = true;
+    _notify();
+
+    // Cancel any previously running timer.
+    _showVolumeLevelTimer?.cancel();
+
+    _showVolumeLevelTimer = Timer(duration, () {
+      _showVolumeLevel = false;
       _notify();
     });
   }
@@ -104,6 +125,13 @@ class FlickDisplayManager extends ChangeNotifier {
   // channel.
   _handleToggleFullscreen() {
     handleShowPlayerControls();
+  }
+
+  // Called when user calls seekForward or seekBackward
+  // on the controlManager.
+  _handleVolumeChange(double volume) {
+    this.volume = volume;
+    handleShowVolumeLevel();
   }
 
   _notify() {

@@ -4,16 +4,19 @@ import './flick_multi_manager.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_widgets/flutter_widgets.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:video_player/video_player.dart';
 
 class FlickMultiPlayer extends StatefulWidget {
   const FlickMultiPlayer(
-      {Key key, this.url, this.image, this.flickMultiManager})
+      {Key? key,
+      required this.url,
+      this.image,
+      required this.flickMultiManager})
       : super(key: key);
 
   final String url;
-  final String image;
+  final String? image;
   final FlickMultiManager flickMultiManager;
 
   @override
@@ -21,12 +24,12 @@ class FlickMultiPlayer extends StatefulWidget {
 }
 
 class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
-  FlickManager flickManager;
+  late FlickManager flickManager;
 
   @override
   void initState() {
     flickManager = FlickManager(
-      videoPlayerController: VideoPlayerController.network(widget.url,videoPlayerOptions: VideoPlayerOptions(isDefaultAudioConfigurationEnabled: false))
+      videoPlayerController: VideoPlayerController.network(widget.url)
         ..setLooping(true),
       autoPlay: false,
     );
@@ -59,7 +62,7 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
                 children: <Widget>[
                   Positioned.fill(
                     child: Image.asset(
-                      widget.image,
+                      widget.image!,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -86,7 +89,7 @@ class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
           flickVideoWithControlsFullscreen: FlickVideoWithControls(
             playerLoadingFallback: Center(
                 child: Image.network(
-              widget.image,
+              widget.image!,
               fit: BoxFit.fitWidth,
             )),
             controls: FlickLandscapeControls(),
