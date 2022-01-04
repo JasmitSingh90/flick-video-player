@@ -116,6 +116,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "pedantic",
+      "rootUri": "file:///Users/jasmitsingh/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "plugin_platform_interface",
+      "rootUri": "file:///Users/jasmitsingh/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "provider",
       "rootUri": "file:///Users/jasmitsingh/.pub-cache/hosted/pub.dartlang.org/provider-6.0.2",
       "packageUri": "lib/",
@@ -189,19 +201,19 @@
     },
     {
       "name": "video_player",
-      "rootUri": "file:///Users/jasmitsingh/.pub-cache/git/plugins-85f1575818e385b19617f38030692e5f76fd9185/packages/video_player/video_player",
+      "rootUri": "file:///Users/jasmitsingh/.pub-cache/git/plugins-1ea710918a10a40983dd9c8a1e451270e9d381f0/packages/video_player/video_player",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     },
     {
       "name": "video_player_platform_interface",
-      "rootUri": "file:///Users/jasmitsingh/.pub-cache/git/plugins-85f1575818e385b19617f38030692e5f76fd9185/packages/video_player/video_player_platform_interface",
+      "rootUri": "file:///Users/jasmitsingh/.pub-cache/hosted/pub.dartlang.org/video_player_platform_interface-5.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "video_player_web",
-      "rootUri": "file:///Users/jasmitsingh/.pub-cache/git/plugins-85f1575818e385b19617f38030692e5f76fd9185/packages/video_player/video_player_web",
+      "rootUri": "file:///Users/jasmitsingh/.pub-cache/hosted/pub.dartlang.org/video_player_web-2.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -248,7 +260,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-01-04T09:39:42.694723Z",
+  "generated": "2022-01-04T10:41:11.138326Z",
   "generator": "pub",
   "generatorVersion": "2.15.0"
 }

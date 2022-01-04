@@ -128,6 +128,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  pedantic:
+    dependency: transitive
+    description:
+      name: pedantic
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.11.1"
+  plugin_platform_interface:
+    dependency: transitive
+    description:
+      name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   provider:
     dependency: "direct main"
     description:
@@ -214,29 +228,25 @@ packages:
     dependency: "direct main"
     description:
       path: "packages/video_player/video_player"
-      ref: "feature/AudioConfigurationEnabledIOS_Update"
-      resolved-ref: "85f1575818e385b19617f38030692e5f76fd9185"
+      ref: plugin-latest-changes
+      resolved-ref: "1ea710918a10a40983dd9c8a1e451270e9d381f0"
       url: "https://github.com/JasmitSingh90/plugins.git"
     source: git
-    version: "2.1.12"
+    version: "2.2.10"
   video_player_platform_interface:
     dependency: transitive
     description:
-      path: "packages/video_player/video_player_platform_interface"
-      ref: "feature/AudioConfigurationEnabledIOS_Update"
-      resolved-ref: "85f1575818e385b19617f38030692e5f76fd9185"
-      url: "https://github.com/JasmitSingh90/plugins.git"
-    source: git
-    version: "4.1.0"
+      name: video_player_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.0"
   video_player_web:
     dependency: transitive
     description:
-      path: "packages/video_player/video_player_web"
-      ref: "feature/AudioConfigurationEnabledIOS_Update"
-      resolved-ref: "85f1575818e385b19617f38030692e5f76fd9185"
-      url: "https://github.com/JasmitSingh90/plugins.git"
-    source: git
-    version: "2.0.2"
+      name: video_player_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.5"
   wakelock:
     dependency: "direct main"
     description:
@@ -281,4 +291,4 @@ packages:
     version: "2.3.3"
 sdks:
   dart: ">=2.14.0 <3.0.0"
-  flutter: ">=2.0.0"
+  flutter: ">=2.5.0"
